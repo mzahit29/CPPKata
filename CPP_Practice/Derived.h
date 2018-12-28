@@ -1,8 +1,10 @@
 #pragma once
 #include "Base.h"
+#include <ostream>
 
 class Derived : public Base
 {
+	int val_derived_{ 100 };
 public:
 
 	Derived() { cout << "Derived()" << endl; };
@@ -48,6 +50,19 @@ public:
 			return *this;
 		Base::operator =(std::move(other));
 		return *this;
+	}
+
+	int operator++()
+	{
+		Base::operator++();
+		return ++val_derived_;
+	}
+
+	friend std::ostream& operator<<(std::ostream& os, const Derived& obj)
+	{
+		os << static_cast<const Base&>(obj);
+		os << "Printing Derived - val_derived_: " << obj.val_derived_ << endl;
+		return os;
 	}
 
 	void g() {}

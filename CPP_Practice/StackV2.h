@@ -124,14 +124,14 @@ public:
 
 };
 
-template <typename T, int size = 8>
+template <typename T, int size>
 T StackV2<T, size>::Pop() {
 	T obj = std::move(*(data.end() - 1));
 	data.erase(data.end() - 1);
 	return obj;
 }
 
-template <typename T, int size = 8>
+template <typename T, int size>
 StackV2<T, size> StackV2<T, size>::Create() {
 	return StackV2<T, size>();
 }

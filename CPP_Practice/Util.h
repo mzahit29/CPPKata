@@ -12,7 +12,21 @@ public:
 	Util() = default;
 	~Util() = default;
 
+	// When it appears in a type - deducing context, T&& acquires a special meaning.
+	// When func is instantiated, T depends on whether the argument passed to func 
+	// is an lvalue or an rvalue. If it's an lvalue of type U, T is deduced to U&. 
+	// If it's an rvalue, T is deduced to U
+	template<typename T>
+	static void type_deductor_func(T&& val); // T&& val is NOT! an r-value reference.
 };
+
+template <typename T>
+void Util::type_deductor_func(T&& val)
+{
+	cout << "Inside type_deductor_func before increment val: " << val << endl;
+	++val;
+	cout << "Inside type_deductor_func after increment val: " << val << endl;
+}
 
 
 template <typename T>

@@ -1,10 +1,12 @@
 #pragma once
 #include <iostream>
+#include <ostream>
 
 using namespace std;
 
 class Base
 {
+	int val_base_{};
 public:
 	Base() { std::cout << "Base()" << endl; }
 	virtual ~Base() { cout << "~Base()" << endl; }
@@ -31,6 +33,18 @@ public:
 			return *this;
 		return *this;
 	}
+
+	int operator++()
+	{
+		return ++val_base_;
+	}
+
+	friend std::ostream& operator<<(std::ostream& os, const Base& obj)
+	{
+		os << "Printing Base part - val_base_: " << obj.val_base_;
+		return os;
+	}
+
 	void f() {}
 	virtual void x() {}
 };
