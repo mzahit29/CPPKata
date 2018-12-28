@@ -18,13 +18,46 @@ public:
 	// If it's an rvalue, T is deduced to U
 	template<typename T>
 	static void type_deductor_func(T&& val); // T&& val is NOT! an r-value reference.
+
+	template<typename T>
+	static bool is_l_value(T&)
+	{
+		cout << "\tL-value g(T&) called, therefore parameter must be l-value" << endl;
+		return true;
+	}
+
+	template<typename T>
+	static bool is_l_value(T&&)
+	{
+		cout << "\tR-value g(T&&) called, therefore parameter must be r-value" << endl;
+		return false;
+	}
 };
 
+/*
+ * This function is a wrapper that forwards the val perfectly (not losing r-value or l-valueness of parameter)
+ * to the wrapped function which is is_l_value in this case
+ */
 template <typename T>
 void Util::type_deductor_func(T&& val)
 {
 	cout << "Inside type_deductor_func before increment val: " << val << endl;
 	++val;
+	// This WON'T WORK!
+	//g(val); // This will only trigger g(T&) because val is an l-value and inside g() T is deduced to T& 
+	//		// so g(T&&) becomes g(T& &&) which is g(T&) according to reference collapsing rule
+	//		// Therefore always g(T&) will be triggered.
+	
+	// This WILL WORK
+	if (is_l_value(std::forward<T>(val)))  // Forwarding the r-value or l-value ness of val to g.
+	{
+		cout << "\tParameter val is an l-value" << endl;
+	}
+	else
+	{
+		cout << "\tParameter val is an r-value" << endl;
+	}
+
 	cout << "Inside type_deductor_func after increment val: " << val << endl;
 }
 
