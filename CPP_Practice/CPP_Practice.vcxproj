@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="A.h" />
+    <ClInclude Include="Algorithm.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="Derived.h" />
     <ClInclude Include="IntegerPtr.h" />
