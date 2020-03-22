@@ -47,16 +47,21 @@ class AutoCounter
 	};
 	static CleanupCheck verifier;
 
-public:
-	// prevent copy construct and assignment
-	AutoCounter(const AutoCounter&) = delete;
-	void operator=(const AutoCounter&) = delete;
-
 	AutoCounter() : id(count++)
 	{
 		verifier.add(this);
 		std::cout << "created[" << id << "]" << std::endl;
 	}
+public:
+	// prevent copy construct and assignment
+	AutoCounter(const AutoCounter&) = delete;
+	void operator=(const AutoCounter&) = delete;
+
+	static AutoCounter* create()
+	{
+		return new AutoCounter();
+	}
+
 	~AutoCounter()
 	{
 		std::cout << "destroying[" << id << "]" << std::endl;
