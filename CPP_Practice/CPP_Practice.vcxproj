@@ -149,11 +149,14 @@
   <ItemGroup>
     <ClInclude Include="A.h" />
     <ClInclude Include="Algorithm.h" />
+    <ClInclude Include="AutoCounter.h" />
     <ClInclude Include="Base.h" />
     <ClInclude Include="Derived.h" />
     <ClInclude Include="IntegerPtr.h" />
     <ClInclude Include="Integer_.h" />
     <ClInclude Include="myVec.h" />
+    <ClInclude Include="PStash.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="StackV2.h" />
     <ClInclude Include="stdafx.h" />
@@ -161,6 +164,7 @@
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AutoCounter.cpp" />
     <ClCompile Include="CPP_Practice.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -168,6 +172,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="CPP_Practice.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
